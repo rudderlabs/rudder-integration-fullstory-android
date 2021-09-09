@@ -28,6 +28,12 @@ dependencies {
     compileOnly 'com.rudderstack.android.sdk:core:1.+'
     // GSON dependency
     implementation 'com.google.code.gson:gson:2.8.6'
+
+    // FullStory
+    repositories {
+        maven { url "https://maven.fullstory.com" }
+    }
+    implementation 'com.fullstory:instrumentation-full:1.18.0@aar'
 }
 
 //apply from: './maven.gradle'

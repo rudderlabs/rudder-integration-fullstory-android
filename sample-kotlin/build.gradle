@@ -13,6 +13,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'fullstory'
+fullstory {
+    org '<YOUR ORG ID HERE>'
+    recordOnStart false
+}
+
 android {
     compileSdkVersion 30
     defaultConfig {
