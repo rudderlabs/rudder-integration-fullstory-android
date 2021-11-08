@@ -41,7 +41,11 @@ public class FullStoryIntegrationFactory extends RudderIntegration<RudderClient>
             switch (type) {
                 case MessageType.IDENTIFY:
                     String userId = !TextUtils.isEmpty(element.getUserId()) ? element.getUserId() : element.getAnonymousId();
-                    FS.identify(userId, element.getTraits());
+                    Map<String, Object> traits = new HashMap<>(element.getTraits());
+                    if (!isEmpty(traits)){
+                        traits.remove("userId");
+                    }
+                    FS.identify(userId, traits);
                     break;
                 case MessageType.TRACK:
                     if (!TextUtils.isEmpty(element.getEventName())) {
