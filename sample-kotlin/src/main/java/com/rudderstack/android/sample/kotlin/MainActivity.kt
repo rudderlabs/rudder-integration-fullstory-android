@@ -1,7 +1,9 @@
 package com.rudderstack.android.sample.kotlin
 
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.fullstory.FS
 import com.rudderlabs.android.sample.kotlin.R
 import com.rudderstack.android.sdk.core.RudderProperty
 import com.rudderstack.android.sdk.core.RudderTraits
@@ -11,33 +13,73 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        MainApplication.rudderClient.identify(
+        val restart = findViewById<Button>(R.id.restart)
+        restart?.setOnClickListener {
+            FS.restart()
+        }
+
+        val track = findViewById<Button>(R.id.track)
+        track?.setOnClickListener {
+            track()
+        }
+
+
+        val identify = findViewById<Button>(R.id.identify)
+        identify?.setOnClickListener {
+            identify()
+        }
+
+        val group = findViewById<Button>(R.id.group)
+        group?.setOnClickListener {
+            group()
+        }
+
+        val screen = findViewById<Button>(R.id.screen)
+        screen?.setOnClickListener {
+            screen()
+        }
+
+        val reset = findViewById<Button>(R.id.rst)
+        reset?.setOnClickListener() {
+            MainApplication.rudderClient.reset()
+        }
+    }
+
+    fun identify() {
+        MainApplication.rudderClient.identify("RudderStack_User_3",
             RudderTraits()
-                .put("name2","RandomName")
-                .putName("Rudderstack")
+                .put("name2","RandomName_3")
+                .putName("RudderStack_3")
+                .putAge("123")
+                .putEmail("support@rudderstack.com3"),
+            null
+        )
+    }
+
+    fun group() {
+        MainApplication.rudderClient.group("RudderStack_User_Group",
+            RudderTraits()
+                .put("name3","RandomName_Group")
+                .putName("RudderStackGroup")
                 .putAge("12")
-                .putEmail("support@rudderstack.com")
+                .putEmail("group@rudderstack.com"),
+            null
         )
+    }
 
-        MainApplication.rudderClient.group("GroupID",
-            RudderTraits()
-                .putEmail("support@rudderstack.com")
-        )
-
-        MainApplication.rudderClient.screen("Screen Call",
+    fun track() {
+        MainApplication.rudderClient.track("Custom Track Call",
             RudderProperty()
-                .putValue("name2", "RandomName")
-                .putValue("Age", "12")
-                .putValue("Email", "support@rudderstack.com")
+                .putValue("Track_Property_1", 123)
+                .putValue("Track_Property_2", 123.234)
         )
+    }
 
-        MainApplication.rudderClient.track("Track Call",
+    fun screen() {
+        MainApplication.rudderClient.screen("Track Call",
             RudderProperty()
-                .putValue("name2", "RandomName")
-                .putValue("Age", "12")
-                .putValue("Email", "support@rudderstack.com")
+                .putValue("size", "1080pixel")
+                .putValue("width", "7")
         )
-
-        MainApplication.rudderClient.reset()
     }
 }
