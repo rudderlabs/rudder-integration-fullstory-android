@@ -1,4 +1,4 @@
-package com.rudderlabs.android.sdk
+package com.rudderstack.sample_kotlin
 
 import org.junit.Test
 

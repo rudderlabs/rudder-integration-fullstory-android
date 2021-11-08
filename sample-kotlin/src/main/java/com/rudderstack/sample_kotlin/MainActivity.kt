@@ -1,10 +1,9 @@
-package com.rudderstack.android.sample.kotlin
+package com.rudderstack.sample_kotlin
 
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.fullstory.FS
-import com.rudderlabs.android.sample.kotlin.R
 import com.rudderstack.android.sdk.core.RudderProperty
 import com.rudderstack.android.sdk.core.RudderTraits
 
@@ -12,6 +11,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         val restart = findViewById<Button>(R.id.restart)
         restart?.setOnClickListener {
@@ -43,10 +43,12 @@ class MainActivity : AppCompatActivity() {
         reset?.setOnClickListener() {
             MainApplication.rudderClient.reset()
         }
+
+
     }
 
     fun identify() {
-        MainApplication.rudderClient.identify("RudderStack_User_3",
+        MainApplication.rudderClient.identify("RudderStack_User_5",
             RudderTraits()
                 .put("name2","RandomName_3")
                 .putName("RudderStack_3")
