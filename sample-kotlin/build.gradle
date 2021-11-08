@@ -9,7 +9,7 @@ apply plugin: 'fullstory'
 fullstory {
     org '<YOUR ORG ID HERE>'
     enabledVariants "all"
-    recordOnStart false
+//    recordOnStart false
 }
 
 
