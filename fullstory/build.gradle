@@ -9,6 +9,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 30
+        versionCode 1
+        versionName "1.0.0"
     }
 
     buildTypes {
@@ -23,10 +25,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.annotation:annotation:1.1.0'
-    // rudder core sdk
-    compileOnly 'com.rudderstack.android.sdk:core:1.+'
-    // GSON dependency
+    implementation 'androidx.annotation:annotation:1.2.0'
+    implementation 'com.rudderstack.android.sdk:core:1.+'
     implementation 'com.google.code.gson:gson:2.8.6'
 
     // FullStory
@@ -36,4 +36,4 @@ dependencies {
     implementation 'com.fullstory:instrumentation-full:1.18.0@aar'
 }
 
-//apply from: './maven.gradle'
+apply from: './maven.gradle'

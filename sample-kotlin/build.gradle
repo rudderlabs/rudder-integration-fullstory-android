@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.0"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31"
     }
 }
 
@@ -16,7 +16,8 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'fullstory'
 fullstory {
     org '<YOUR ORG ID HERE>'
-    recordOnStart false
+    enabledVariants "all"
+//    recordOnStart false
 }
 
 android {
@@ -42,9 +43,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
 
     implementation 'com.rudderstack.android.sdk:core:1.+'
     implementation project(':fullstory')
