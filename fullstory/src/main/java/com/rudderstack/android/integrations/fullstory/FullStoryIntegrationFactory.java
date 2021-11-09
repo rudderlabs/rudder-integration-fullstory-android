@@ -34,10 +34,20 @@ public class FullStoryIntegrationFactory extends RudderIntegration<RudderClient>
     private FullStoryIntegrationFactory() {
     }
 
+    @Override
+    public void dump(@Nullable RudderMessage element) {
+        try {
+            if (element != null) {
+                processRudderEvent(element);
+            }
+        } catch (Exception e) {
+            RudderLogger.logError(e);
+        }
+    }
+
     private void processRudderEvent(RudderMessage element) {
         String type = element.getType();
         if (type != null) {
-            Map<String, Object> userVars;
             switch (type) {
                 case MessageType.IDENTIFY:
                     String userId = !TextUtils.isEmpty(element.getUserId()) ? element.getUserId() : element.getAnonymousId();
@@ -49,27 +59,17 @@ public class FullStoryIntegrationFactory extends RudderIntegration<RudderClient>
                     break;
                 case MessageType.TRACK:
                     if (!TextUtils.isEmpty(element.getEventName())) {
-                        FS.event(element.getEventName(), element.getProperties());
+                        FS.event(getTrimKey(element.getEventName()), element.getProperties());
                         return;
                     }
                     RudderLogger.logDebug("Event name is not present in the Track call. Hence, event not sent");
                     break;
                 case MessageType.SCREEN:
                     if (!TextUtils.isEmpty(element.getEventName())) {
-                        FS.event("screen view " + element.getEventName(), element.getProperties());
+                        FS.event(getTrimKey("screen view " + element.getEventName()), element.getProperties());
                         return;
                     }
                     RudderLogger.logDebug("Event name is not present in the Screen call. Hence, event not sent");
-                    break;
-                case MessageType.GROUP:
-                    userVars = new HashMap<>();
-                    if (!TextUtils.isEmpty(element.getGroupId())) {
-                        userVars.put("groupID_str", element.getGroupId());
-                    }
-                    if (!isEmpty(element.getTraits())) {
-                        userVars.putAll(element.getTraits());
-                    }
-                    FS.setUserVars(userVars);
                     break;
                 default:
                     RudderLogger.logWarn("MessageType is not specified or supported");
@@ -84,15 +84,12 @@ public class FullStoryIntegrationFactory extends RudderIntegration<RudderClient>
         RudderLogger.logVerbose("FS.anonymize();");
     }
 
-    @Override
-    public void dump(@Nullable RudderMessage element) {
-        try {
-            if (element != null) {
-                processRudderEvent(element);
-            }
-        } catch (Exception e) {
-            RudderLogger.logError(e);
+    static String getTrimKey(String key) {
+        // FullStory event names can be no longer than 250 characters.
+        if (key.length() > 250) {
+            key = key.substring(0, 250);
         }
+        return key;
     }
 
     private boolean isEmpty(Map<String, Object> value) {
