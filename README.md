@@ -15,10 +15,14 @@ implementation 'com.rudderstack.android.sdk:core:1.+'
 implementation 'com.rudderstack.android.integration:fullstory:1.0.0'
 implementation 'com.google.code.gson:gson:2.8.6'
 
-// Fullstory dependencies here
+// FullStory
+repositories {
+    maven { url "https://maven.fullstory.com" }
+}
+implementation 'com.fullstory:instrumentation-full:1.18.0@aar'
 ```
 
-5. Finally change the initialization of your `RudderClient` in your `Application` class:
+3. Finally change the initialization of your `RudderClient` in your `Application` class:
 
 ```groovy
 val rudderClient = RudderClient.getInstance(
