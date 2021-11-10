@@ -104,26 +104,13 @@ public class FullStoryIntegrationFactory extends RudderIntegration<RudderClient>
         for (String key : properties.keySet()) {
             Object item = properties.get(key);
             key = key.trim().replace(" ", "_");
-            // default to no suffix;
-            String suffix = "";
-            if (item instanceof String || item instanceof Character) {
-                suffix = "_str";
-            } else if (item instanceof Number) {
-                // default to real
-                suffix = "_real";
-                if (item instanceof Integer || item instanceof BigInteger || item instanceof Long || item instanceof Short) {
-                    suffix = "_int";
-                }
-            } else if (item instanceof Boolean) {
-                suffix = "_bool";
-            } else if (item instanceof Date) {
-                suffix = "_date";
+            if (item instanceof Date) {
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
                 formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
-                suffixedProperty.put(key + suffix, formatter.format(item));
+                suffixedProperty.put(key + "_date", formatter.format(item));
                 continue;
             }
-            suffixedProperty.put(key + suffix, item);
+            suffixedProperty.put(key, item);
         }
         return suffixedProperty;
     }
