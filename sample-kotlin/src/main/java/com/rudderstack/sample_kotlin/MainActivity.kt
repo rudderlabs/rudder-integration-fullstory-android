@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.fullstory.FS
 import com.rudderstack.android.sdk.core.RudderProperty
 import com.rudderstack.android.sdk.core.RudderTraits
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,11 +30,6 @@ class MainActivity : AppCompatActivity() {
             identify()
         }
 
-        val group = findViewById<Button>(R.id.group)
-        group?.setOnClickListener {
-            group()
-        }
-
         val screen = findViewById<Button>(R.id.screen)
         screen?.setOnClickListener {
             screen()
@@ -48,32 +44,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun identify() {
-        MainApplication.rudderClient.identify("RudderStack_User_5",
+        MainApplication.rudderClient.identify("RudderStack_User_24",
             RudderTraits()
                 .put("name2","RandomName_3")
                 .putName("RudderStack_3")
                 .putAge("123")
-                .putEmail("support@rudderstack.com3"),
-            null
-        )
-    }
-
-    fun group() {
-        MainApplication.rudderClient.group("RudderStack_User_Group",
-            RudderTraits()
-                .put("name3","RandomName_Group")
-                .putName("RudderStackGroup")
-                .putAge("12")
-                .putEmail("group@rudderstack.com"),
+                .putEmail("support@rudderstack.com24"),
             null
         )
     }
 
     fun track() {
-        MainApplication.rudderClient.track("Custom Track Call",
+        MainApplication.rudderClient.track("Custom Track Call_1",
             RudderProperty()
                 .putValue("Track_Property_1", 123)
                 .putValue("Track_Property_2", 123.234)
+                .putValue("date", Date())
+                .putValue("String_custom", "abc")
+                .putValue("String_custom 123", "abc 2")
+                .putValue("Null_Check", null)
+                .putValue("array_of_Int", arrayOf<Int>(1, 2, 3))
+                .putValue("feature_packs", arrayOf("MAPS", "DEV", "DATA"))
         )
     }
 

@@ -11,10 +11,14 @@ More information on RudderStack can be found [here](https://github.com/rudderlab
 2. Add the following `dependencies` to your `app/build.gradle` file as shown:
 
 ```groovy
-implementation 'com.rudderstack.android.sdk:core:1.+'
+implementation 'com.rudderstack.android.sdk:core:1.0.22'
 implementation 'com.rudderstack.android.integration:fullstory:1.0.0'
 implementation 'com.google.code.gson:gson:2.8.6'
+```
 
+3. Add the following `dependencies` to your `app/build.gradle` file as shown:
+
+```groovy
 // FullStory
 repositories {
     maven { url "https://maven.fullstory.com" }
@@ -22,7 +26,20 @@ repositories {
 implementation 'com.fullstory:instrumentation-full:1.18.0@aar'
 ```
 
-3. Finally change the initialization of your `RudderClient` in your `Application` class:
+4. Add the following `dependencies` to your `project/build.gradle` file as shown:
+
+```groovy
+buildscript {
+    repositories {
+        maven { url "https://maven.fullstory.com" }
+    }
+    dependencies {
+        classpath 'com.fullstory:gradle-plugin-local:1.18.0'
+    }
+}
+```
+
+5. Finally change the initialization of your `RudderClient` in your `Application` class:
 
 ```groovy
 val rudderClient = RudderClient.getInstance(
