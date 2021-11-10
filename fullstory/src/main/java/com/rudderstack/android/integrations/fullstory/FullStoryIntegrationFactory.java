@@ -62,7 +62,7 @@ public class FullStoryIntegrationFactory extends RudderIntegration<RudderClient>
                         FS.identify(element.getUserId(), traits);
                         return;
                     }
-                    FS.setUserVars(traits);
+                    RudderLogger.logDebug("Identify call is not made because UserId is missing");
                     break;
                 case MessageType.TRACK:
                     if (!TextUtils.isEmpty(element.getEventName())) {
