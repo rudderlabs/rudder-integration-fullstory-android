@@ -36,4 +36,4 @@ dependencies {
     implementation 'com.fullstory:instrumentation-full:1.18.0@aar'
 }
 
-apply from: './maven.gradle'
+//apply from: './maven.gradle'

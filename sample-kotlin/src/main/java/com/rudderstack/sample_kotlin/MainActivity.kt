@@ -44,10 +44,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun identify() {
-        MainApplication.rudderClient.identify("RudderStack_User_24",
+        MainApplication.rudderClient.identify("RudderStack_test_2",
             RudderTraits()
-                .put("name2","RandomName_3")
-                .putName("RudderStack_3")
+                .put("displayName","RandomName_2")
+                .putName("RudderStack_2")
                 .putAge("123")
                 .putEmail("support@rudderstack.com24"),
             null
