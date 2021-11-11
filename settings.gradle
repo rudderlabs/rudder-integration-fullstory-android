@@ -1,1 +1,2 @@
-include ':sample-kotlin', ':fullstory'
+include ':fullstory'
+include ':sample-kotlin'

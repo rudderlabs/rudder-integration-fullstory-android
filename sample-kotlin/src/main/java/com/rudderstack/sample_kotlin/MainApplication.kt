@@ -1,4 +1,4 @@
-package com.rudderstack.android.sample.kotlin
+package com.rudderstack.sample_kotlin
 
 import android.app.Application
 import com.rudderstack.android.integrations.fullstory.FullStoryIntegrationFactory
@@ -8,9 +8,9 @@ import com.rudderstack.android.sdk.core.RudderLogger
 
 class MainApplication : Application() {
     companion object {
-        private const val WRITE_KEY = "1xIr1sV5n7yTlpYO3IxrWIvK9Q6"
-        private const val DATA_PLANE_URL = "https://941a-2405-201-8000-609d-6467-f5-fcc5-20f.ngrok.io"
-        private const val CONTROL_PLANE_URL = "https://5416-2405-201-8000-609d-6467-f5-fcc5-20f.ngrok.io"
+        private const val WRITE_KEY = "1xwMDX5BwehYuZv0BuXOezWmgHt"
+        private const val DATA_PLANE_URL = "https://ed19-2405-201-8000-6102-7155-d956-c1f9-9985.ngrok.io"
+        private const val CONTROL_PLANE_URL = "https://c3ef-2405-201-8000-6102-7155-d956-c1f9-9985.ngrok.io"
         lateinit var rudderClient: RudderClient
     }
 
@@ -24,6 +24,7 @@ class MainApplication : Application() {
                 .withControlPlaneUrl(CONTROL_PLANE_URL)
                 .withFactory(FullStoryIntegrationFactory.FACTORY)
                 .withLogLevel(RudderLogger.RudderLogLevel.VERBOSE)
+                .withTrackLifecycleEvents(false)
                 .build()
         )
     }
