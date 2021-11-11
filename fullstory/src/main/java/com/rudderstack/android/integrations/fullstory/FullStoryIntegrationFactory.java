@@ -12,7 +12,6 @@ import com.rudderstack.android.sdk.core.RudderIntegration;
 import com.rudderstack.android.sdk.core.RudderLogger;
 import com.rudderstack.android.sdk.core.RudderMessage;
 
-import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -54,8 +53,10 @@ public class FullStoryIntegrationFactory extends RudderIntegration<RudderClient>
         if (type != null) {
             switch (type) {
                 case MessageType.IDENTIFY:
-                    Map<String, Object> traits = new HashMap<>(element.getTraits());
-                    if (!isEmpty(traits)){
+                    Map<String, Object> userTraits = getSuffixProperty(element.getTraits());
+                    Map<String, Object> traits = null;
+                    if (!isEmpty(userTraits)) {
+                        traits = new HashMap<>(userTraits);
                         traits.remove("userId");
                     }
                     if (!TextUtils.isEmpty(element.getUserId())) {
