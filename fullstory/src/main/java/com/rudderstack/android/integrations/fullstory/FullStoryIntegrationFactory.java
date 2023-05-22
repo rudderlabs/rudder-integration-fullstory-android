@@ -2,6 +2,7 @@ package com.rudderstack.android.integrations.fullstory;
 
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.fullstory.FS;
@@ -53,14 +54,10 @@ public class FullStoryIntegrationFactory extends RudderIntegration<RudderClient>
         if (type != null) {
             switch (type) {
                 case MessageType.IDENTIFY:
-                    Map<String, Object> userTraits = getSuffixProperty(element.getTraits());
-                    Map<String, Object> traits = null;
-                    if (!isEmpty(userTraits)) {
-                        traits = new HashMap<>(userTraits);
-                        traits.remove("userId");
-                    }
                     if (!TextUtils.isEmpty(element.getUserId())) {
-                        FS.identify(element.getUserId(), traits);
+                        Map<String, Object> userTraits = getSuffixProperty(element.getTraits());
+                        userTraits.remove("userId");
+                        FS.identify(element.getUserId(), userTraits);
                         return;
                     }
                     RudderLogger.logDebug("Identify call is not made because UserId is missing");
@@ -75,10 +72,6 @@ public class FullStoryIntegrationFactory extends RudderIntegration<RudderClient>
                 case MessageType.SCREEN:
                     if (!TextUtils.isEmpty(element.getEventName())) {
                         Map<String, Object> screenProperties = getSuffixProperty(element.getProperties());
-                        if (isEmpty(screenProperties)) {
-                            screenProperties = new HashMap<>();
-                        }
-                        screenProperties.put("name", element.getEventName());
                         FS.event("Screen Viewed", screenProperties);
                         return;
                     }
@@ -97,9 +90,10 @@ public class FullStoryIntegrationFactory extends RudderIntegration<RudderClient>
         RudderLogger.logVerbose("FS.anonymize();");
     }
 
+    @NonNull
     private Map<String, Object> getSuffixProperty(Map<String, Object> properties) {
         if (isEmpty(properties)) {
-            return null;
+            return new HashMap<>();
         }
         Map<String, Object> suffixedProperty = new HashMap<>();
         for (String key : properties.keySet()) {
