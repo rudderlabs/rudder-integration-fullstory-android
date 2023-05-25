@@ -39,12 +39,10 @@ class MainActivity : AppCompatActivity() {
         reset?.setOnClickListener() {
             MainApplication.rudderClient.reset()
         }
-
-
     }
 
     fun identify() {
-        MainApplication.rudderClient.identify("RudderStack_test_2",
+        MainApplication.rudderClient.identify("RudderStack Android userId 1",
             RudderTraits()
                 .put("displayName","RandomName_2")
                 .putName("RudderStack_2")
@@ -62,14 +60,13 @@ class MainActivity : AppCompatActivity() {
                 .putValue("date", Date())
                 .putValue("String_custom", "abc")
                 .putValue("String_custom 123", "abc 2")
-                .putValue("Null_Check", null)
                 .putValue("array_of_Int", arrayOf<Int>(1, 2, 3))
                 .putValue("feature_packs", arrayOf("MAPS", "DEV", "DATA"))
         )
     }
 
     fun screen() {
-        MainApplication.rudderClient.screen("Track Call",
+        MainApplication.rudderClient.screen("Main Activity",
             RudderProperty()
                 .putValue("size", "1080pixel")
                 .putValue("width", "7")
