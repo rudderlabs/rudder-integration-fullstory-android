@@ -11,9 +11,8 @@ More information on RudderStack can be found [here](https://github.com/rudderlab
 2. Add the following `dependencies` to your `app/build.gradle` file as shown:
 
 ```groovy
-implementation 'com.rudderstack.android.sdk:core:1.0.22'
-implementation 'com.rudderstack.android.integration:fullstory:1.0.0'
-implementation 'com.google.code.gson:gson:2.8.6'
+implementation 'com.rudderstack.android.sdk:core:[1.0,2.0)'
+implementation 'com.rudderstack.android.integration:fullstory:1.0.1'
 ```
 
 3. Add the following `dependencies` to your `app/build.gradle` file as shown:
@@ -23,7 +22,7 @@ implementation 'com.google.code.gson:gson:2.8.6'
 repositories {
     maven { url "https://maven.fullstory.com" }
 }
-implementation 'com.fullstory:instrumentation-full:1.18.0@aar'
+implementation 'com.fullstory:instrumentation-full:1.37.1@aar'
 ```
 
 4. Add the following `dependencies` to your `project/build.gradle` file as shown:
@@ -34,7 +33,7 @@ buildscript {
         maven { url "https://maven.fullstory.com" }
     }
     dependencies {
-        classpath 'com.fullstory:gradle-plugin-local:1.18.0'
+        classpath 'com.fullstory:gradle-plugin-local:1.37.1'
     }
 }
 ```
@@ -44,9 +43,9 @@ buildscript {
 ```groovy
 val rudderClient = RudderClient.getInstance(
     this,
-    <YOUR_WRITE_KEY>,
+    "<YOUR_WRITE_KEY>",
     RudderConfig.Builder()
-        .withDataPlaneUrl(<YOUR_DATA_PLANE_URL>)
+        .withDataPlaneUrl("<YOUR_DATA_PLANE_URL>")
         .withFactory(FullstoryIntegrationFactory.FACTORY)
         .build()
 )

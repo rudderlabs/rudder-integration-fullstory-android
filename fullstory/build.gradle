@@ -3,14 +3,11 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    compileSdkVersion 33
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0.0"
+        minSdkVersion 19
+        targetSdkVersion 33
     }
 
     buildTypes {
@@ -19,21 +16,37 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    namespace 'com.rudderstack.android.integrations.fullstory'
 }
 
 
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.annotation:annotation:1.2.0'
-    implementation 'com.rudderstack.android.sdk:core:1.0.22'
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+
+    implementation 'androidx.annotation:annotation:1.6.0'
+    testImplementation 'com.android.support.test:rules:1.0.2'
+    testImplementation 'com.android.support.test:runner:1.0.2'
+    testImplementation "org.robolectric:robolectric:4.7.3"
+    testImplementation "androidx.test:core-ktx:1.5.0"
+
+    testImplementation "org.hamcrest:hamcrest:2.2"
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation "org.mockito:mockito-core:4.0.0"
+    testImplementation 'org.json:json:20220924'
+    testImplementation "com.rudderstack.android.sdk:core:[1.7.0,2.0.0)"
+
+    // RudderStack Android SDK
+    compileOnly 'com.rudderstack.android.sdk:core:[1.7.0,2.0.0)'
+    // GSON
+    implementation 'com.google.code.gson:gson:2.10.1'
 
     // FullStory
     repositories {
         maven { url "https://maven.fullstory.com" }
     }
-    implementation 'com.fullstory:instrumentation-full:1.18.0@aar'
+    implementation 'com.fullstory:instrumentation-full:1.37.1@aar'
 }
 
-//apply from: './maven.gradle'
+apply from: rootProject.file('gradle/mvn-publish.gradle')
+apply from: rootProject.file('gradle/codecov.gradle')
