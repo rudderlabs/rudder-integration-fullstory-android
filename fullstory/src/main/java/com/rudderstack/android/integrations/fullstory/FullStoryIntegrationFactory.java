@@ -93,7 +93,7 @@ public class FullStoryIntegrationFactory extends RudderIntegration<RudderClient>
     @NonNull
     private Map<String, Object> getSuffixProperty(Map<String, Object> properties) {
         if (isEmpty(properties)) {
-            return new HashMap<>();
+            return Collections.emptyMap();
         }
         Map<String, Object> suffixedProperty = new HashMap<>();
         for (String key : properties.keySet()) {
