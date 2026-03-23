@@ -18,7 +18,7 @@ implementation 'com.rudderstack.android.integration:fullstory:1.0.1'
 3. Add the following `dependencies` to your `app/build.gradle` file as shown:
 
 ```groovy
-// FullStory
+// FullStoryte
 repositories {
     maven { url "https://maven.fullstory.com" }
 }
