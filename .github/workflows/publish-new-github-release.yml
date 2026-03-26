@@ -72,6 +72,9 @@ jobs:
           files: ''
           tag: 'v${{ steps.extract-version.outputs.release_version }}'
 
+      - name: Fetch remote tags
+        run: git fetch --tags
+
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
